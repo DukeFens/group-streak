@@ -19,9 +19,3 @@
 _Last updated: 2026-07-06 08:30 UTC_
 
 ---
-
-## ➕ Thêm thành viên
-
-1. Thêm username vào file [`members.txt`](./members.txt) (mỗi dòng một username)
-2. Thêm một streak card ở mục trên (copy một block, đổi username)
-3. Commit — leaderboard sẽ tự cập nhật ở lần chạy tiếp theo
