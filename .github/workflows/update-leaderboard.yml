@@ -1,0 +1,33 @@
+name: Update group streak leaderboard
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # 03:00 UTC = 10:00 sáng giờ Việt Nam
+  push:
+    paths:
+      - "members.txt"
+      - "scripts/update_leaderboard.py"
+      - ".github/workflows/update-leaderboard.yml"
+  workflow_dispatch: # cho phép chạy tay từ tab Actions
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update leaderboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/update_leaderboard.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update streak leaderboard" || exit 0
+          git push
